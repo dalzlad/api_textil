@@ -11,8 +11,9 @@ class UsuarioCreate(UsuarioBase):
 
 class UsuarioOut(UsuarioBase):
     id: int
-    class Config:
-        orm_mode = True
+    model_config = {
+        "from_attributes": True
+    }
 
 class Token(BaseModel):
     access_token: str
@@ -34,5 +35,6 @@ class PedidoCreate(PedidoBase):
 class PedidoOut(PedidoBase):
     id: int
     usuario_id: int
-    class Config:
-        orm_mode = True
+    model_config = {
+        "from_attributes": True
+    }
