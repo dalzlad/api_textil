@@ -1,17 +1,17 @@
 from sqlalchemy.orm import Session
-from . import models, schemas, auth
+from . import models, schemas, routers
 
-def crear_usuario(db: Session, usuario: schemas.UsuarioCrear):
-    hashed_password = auth.encriptar_password(usuario.password)
-    nuevo_usuario = models.User(
-        username=usuario.username,
+def crear_usuario(db: Session, usuario: schemas.UsuarioCreate):
+    hashed = routers.auth.encriptar_password(usuario.contrasena)
+    nuevo = models.Usuario(
+        nombre=usuario.nombre,
         email=usuario.email,
-        hashed_password=hashed_password
+        contrasena=hashed
     )
-    db.add(nuevo_usuario)
+    db.add(nuevo)
     db.commit()
-    db.refresh(nuevo_usuario)
-    return nuevo_usuario
+    db.refresh(nuevo)
+    return nuevo
 
-def obtener_usuario_por_username(db: Session, username: str):
-    return db.query(models.User).filter(models.User.username == username).first()
+def obtener_usuario_por_username(db: Session, nombre: str):
+    return db.query(models.Usuario).filter(models.Usuario.nombre == nombre).first()
