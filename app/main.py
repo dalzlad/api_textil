@@ -8,7 +8,8 @@ app = FastAPI()
 
 # ✅ Habilitar CORS
 origins = [
-    "http://localhost:5173",  # Frontend local
+    "http://localhost:5173",
+    "https://front-textil.vercel.app",  # 👈 Agrega aquí tu dominio de producción
 ]
 
 app.add_middleware(
